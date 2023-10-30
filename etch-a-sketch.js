@@ -40,21 +40,45 @@ resize.textContent='Resize';
 gridSizing.appendChild(resize);
 
 resize.addEventListener('click', () =>{
+    let checkValue=parseInt(input.value);
+    if(checkValue<1 || checkValue>100 || typeof checkValue !== 'number' || checkValue !== Math.floor(checkValue)){
+        alert('Please enter an integer between 1 and 100!');
+        return;
+    }
     for(i=0;i<updatedDivvy;i++){
         let square = document.getElementById(i);
         grid.removeChild(square);
     }
-    updatedGridSize=input.value;
+    updatedGridSize=checkValue;
     input.value='';
     updatedDivvy=updatedGridSize * updatedGridSize;
     updatedSquareSize=gridDimensions/updatedGridSize;
     for(i=0;i<updatedDivvy;i++){
+        let r=0;
+        let g=0;
+        let b=0;
+        let rTenth=r*.1;
+        let gTenth=g*.1;
+        let bTenth=b*.1;
         let square=document.createElement('div');
         square.setAttribute('id', i);
         square.setAttribute('style', `height: ${updatedSquareSize}px; width: ${updatedSquareSize}px; border: 4px; border-radius: 2px; background-color: black;`);
         grid.appendChild(square);
         square.addEventListener('mouseenter', () =>{
-            square.setAttribute('style', `height: ${updatedSquareSize}px; width: ${updatedSquareSize}px; border: 4px; border-radius: 2px; background-color: red;`);
+            if(r<=0 && g<=0 && b<=0){
+                r=Math.random()*255;
+                g=Math.random()*255;
+                b=Math.random()*255;
+                rTenth=r*.1;
+                gTenth=g*.1;
+                bTenth=b*.1;
+                square.setAttribute('style', `height: ${updatedSquareSize}px; width: ${updatedSquareSize}px; border: 4px; border-radius: 2px; background-color: rgb(${r}, ${g}, ${b});`);
+            }else{
+                r=r-rTenth;
+                g=g-gTenth;
+                b=b-bTenth;
+                square.setAttribute('style', `height: ${updatedSquareSize}px; width: ${updatedSquareSize}px; border: 4px; border-radius: 2px; background-color: rgb(${r}, ${g}, ${b});`);
+            }
         });
     }
     input.focus();
@@ -70,12 +94,31 @@ let divvy=initialGridSize * initialGridSize;
 let initialSquareSize=gridDimensions/initialGridSize;
 
 for(i=0;i<divvy;i++){
+    let r=0;
+    let g=0;
+    let b=0;
+    let rTenth=r*.1;
+    let gTenth=g*.1;
+    let bTenth=b*.1;
     let square=document.createElement('div');
     square.setAttribute('id', i);
-    square.setAttribute('style', `height: ${initialSquareSize}px; width: ${initialSquareSize}px; border: 4px; border-radius: 2px; background-color: black;`);
+    square.setAttribute('style', `height: ${initialSquareSize}px; width: ${initialSquareSize}px; border: 4px; border-radius: 2px; background-color: rgb(${r}, ${g}, ${b});`);
     grid.appendChild(square);
     square.addEventListener('mouseenter', () =>{
-        square.setAttribute('style', `height: ${initialSquareSize}px; width: ${initialSquareSize}px; border: 4px; border-radius: 2px; background-color: red;`);
+        if(r<=0 && g<=0 && b<=0){
+            r=Math.random()*255;
+            g=Math.random()*255;
+            b=Math.random()*255;
+            rTenth=r*.1;
+            gTenth=g*.1;
+            bTenth=b*.1;
+            square.setAttribute('style', `height: ${initialSquareSize}px; width: ${initialSquareSize}px; border: 4px; border-radius: 2px; background-color: rgb(${r}, ${g}, ${b});`);
+        }else{
+            r=r-rTenth;
+            g=g-gTenth;
+            b=b-bTenth;
+            square.setAttribute('style', `height: ${initialSquareSize}px; width: ${initialSquareSize}px; border: 4px; border-radius: 2px; background-color: rgb(${r}, ${g}, ${b});`);
+        }
     });
 }
 
