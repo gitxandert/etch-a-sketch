@@ -1,4 +1,4 @@
-# calculator
+# etch-a-sketch
 
-This is a project that represents more challenging javascript
-problems than I have tackled so far.
+This is a project demonstrating a command of more difficult
+java techniques than I've employed up to now.
